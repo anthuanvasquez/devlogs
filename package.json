@@ -1,0 +1,20 @@
+{
+  "name": "dev-logs",
+  "description": "Genera reportes diarios de commits y envialos a Discord",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": {
+    "devlogs": "./index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "dotenv": "^17.2.4"
+  }
+}
