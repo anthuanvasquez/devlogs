@@ -1,14 +1,55 @@
-#!/usr/bin/env node
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { execSync } from "child_process";
 import fs from "fs";
 import path from "path";
+import readline from "readline";
 import 'dotenv/config';
 
 const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL;
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-flash-lite-latest" });
+
+async function sendToDiscord(message) {
+  if (!DISCORD_WEBHOOK_URL) return;
+  console.log("🚀 Enviando a Discord...");
+  await fetch(DISCORD_WEBHOOK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ content: message })
+  });
+  console.log("✅ Reporte enviado a Discord con éxito.");
+}
+
+async function sendToTelegram(message) {
+  if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) return;
+  console.log("✈️ Enviando a Telegram...");
+  const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+  await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: TELEGRAM_CHAT_ID,
+      text: message,
+      parse_mode: 'Markdown'
+    })
+  });
+  console.log("✅ Reporte enviado a Telegram con éxito.");
+}
+
+function askQuestion(query) {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+  return new Promise(resolve => rl.question(query, ans => {
+    rl.close();
+    resolve(ans);
+  }));
+}
 
 async function main() {
   try {
@@ -25,13 +66,14 @@ async function main() {
     projectName = projectName.charAt(0).toUpperCase() + projectName.slice(1);
 
     const dateOptions = { weekday: 'long', day: 'numeric', month: 'long' };
-    const todayStr = new Date().toLocaleDateString('es-ES', dateOptions);
     const dayName = new Date().toLocaleDateString('es-ES', { weekday: 'long' });
     const dayNum = new Date().getDate();
     const formattedDate = `${dayName.charAt(0).toUpperCase() + dayName.slice(1)} ${dayNum}`;
+    
     console.log(`🔍 Buscando commits de hoy para: ${projectName}...`);
     
     let commits = "";
+    
     try {
       commits = execSync('git log --since="00:00" --oneline --no-merges', { encoding: 'utf8' }).trim();
     } catch (error) {
@@ -42,6 +84,24 @@ async function main() {
     if (!commits) {
       console.log("✅ No hay commits hoy. ¡A descansar!");
       return;
+    }
+
+    const hasDiscord = !!DISCORD_WEBHOOK_URL;
+    const hasTelegram = !!(TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID);
+
+    if (!hasDiscord && !hasTelegram) {
+      throw new Error("❌ No se encontró configuración para Discord ni Telegram en el archivo .env");
+    }
+
+    let target = "";
+
+    if (hasDiscord && hasTelegram) {
+      const answer = await askQuestion("¿Dónde deseas enviar el reporte? (discord/telegram/ambos) [ambos]: ");
+      target = answer.toLowerCase().trim() || "ambos";
+    } else if (hasDiscord) {
+      target = "discord";
+    } else {
+      target = "telegram";
     }
 
     const prompt = `
@@ -63,20 +123,15 @@ async function main() {
     const aiSummary = result.response.text();
     const finalMessage = `## 📝 Resumen Diario - ${formattedDate} - ${projectName}\n\n${aiSummary}`;
     
-    console.log("🚀 Enviando a Discord...");
+    if (target === "discord" || target === "ambos") {
+      await sendToDiscord(finalMessage);
+    }
     
-    await fetch(DISCORD_WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        content: finalMessage
-      })
-    });
-
-    console.log("✅ Reporte enviado con éxito.");
-
+    if (target === "telegram" || target === "ambos") {
+      await sendToTelegram(finalMessage);
+    }
   } catch (error) {
-    console.error("❌ Error:", error);
+    console.error("❌ Error:", error.message || error);
   }
 }
 
