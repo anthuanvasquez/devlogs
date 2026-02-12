@@ -165,8 +165,8 @@ async function main() {
 
 export { main, sendToDiscord, sendToTelegram };
 
-// Check if the current file is the main module
 import { fileURLToPath } from 'url';
+
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   main();
 }
