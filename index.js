@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { execSync } from "child_process";
 import fs from "fs";

@@ -1,7 +1,7 @@
 {
   "name": "@anthuanvasquez/devlogs",
   "description": "Genera reportes diarios de commits y envialos a Discord",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "index.js",
   "bin": {
     "devlogs": "./index.js"
@@ -32,7 +32,8 @@
     "release": "standard-version",
     "release:minor": "standard-version --release-as minor",
     "release:patch": "standard-version --release-as patch",
-    "release:major": "standard-version --release-as major"
+    "release:major": "standard-version --release-as major",
+    "publish": "npm publish --access public"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
