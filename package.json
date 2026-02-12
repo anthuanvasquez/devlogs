@@ -28,7 +28,7 @@
   "homepage": "https://github.com/anthuanvasquez/devlogs#readme",
   "type": "module",
   "scripts": {
-    "test": "node index.spec.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "build": "esbuild index.js --bundle --platform=node --format=esm --outfile=dist/index.js --packages=external",
     "release": "standard-version",
     "release:minor": "standard-version --release-as minor",
@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "esbuild": "^0.27.3",
+    "jest": "^30.2.0",
     "standard-version": "^9.5.0"
   }
 }
