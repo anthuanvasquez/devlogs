@@ -1,0 +1,8 @@
+.env
+.env.example
+.git
+.github
+docs
+run-all-projects.sh
+projects.json
+assets
