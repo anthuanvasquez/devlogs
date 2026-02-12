@@ -6,9 +6,26 @@
   "bin": {
     "devlogs": "./index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "git",
+    "report",
+    "ai",
+    "gemini",
+    "discord",
+    "telegram",
+    "developer",
+    "tools"
+  ],
+  "author": "Anthuan Vasquez",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anthuanvasquez/dev-logs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/anthuanvasquez/dev-logs/issues"
+  },
+  "homepage": "https://github.com/anthuanvasquez/dev-logs#readme",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
