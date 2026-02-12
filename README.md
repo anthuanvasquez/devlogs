@@ -1,5 +1,9 @@
 # Dev Logs 📝
 
+<p align="center">
+  <img src="assets/logo.png" alt="Dev Logs Logo" width="200" style="image-rendering: pixelated;">
+</p>
+
 > Automated daily commit reports powered by Gemini AI, delivered to Discord and Telegram.
 
 ## Features
