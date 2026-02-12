@@ -1,5 +1,5 @@
 {
-  "name": "devlogs",
+  "name": "@anthuanvasquez/devlogs",
   "description": "Genera reportes diarios de commits y envialos a Discord",
   "version": "1.0.1",
   "main": "index.js",
