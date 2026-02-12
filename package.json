@@ -20,12 +20,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anthuanvasquez/dev-logs.git"
+    "url": "git+https://github.com/anthuanvasquez/devlogs.git"
   },
   "bugs": {
-    "url": "https://github.com/anthuanvasquez/dev-logs/issues"
+    "url": "https://github.com/anthuanvasquez/devlogs/issues"
   },
-  "homepage": "https://github.com/anthuanvasquez/dev-logs#readme",
+  "homepage": "https://github.com/anthuanvasquez/devlogs#readme",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
