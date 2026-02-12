@@ -1,7 +1,7 @@
 {
   "name": "@anthuanvasquez/devlogs",
   "description": "Genera reportes diarios de commits y envialos a Discord",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "main": "dist/index.js",
   "bin": {
     "devlogs": "./dist/index.js"
@@ -28,8 +28,8 @@
   "homepage": "https://github.com/anthuanvasquez/devlogs#readme",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "esbuild index.js --bundle --platform=node --format=esm --outfile=dist/index.js --banner:js=\"#!/usr/bin/env node\" --packages=external",
+    "test": "node index.spec.js",
+    "build": "esbuild index.js --bundle --platform=node --format=esm --outfile=dist/index.js --packages=external",
     "release": "standard-version",
     "release:minor": "standard-version --release-as minor",
     "release:patch": "standard-version --release-as patch",
