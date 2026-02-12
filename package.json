@@ -1,7 +1,7 @@
 {
   "name": "dev-logs",
   "description": "Genera reportes diarios de commits y envialos a Discord",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "bin": {
     "devlogs": "./index.js"
