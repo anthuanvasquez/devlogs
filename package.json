@@ -28,10 +28,17 @@
   "homepage": "https://github.com/anthuanvasquez/dev-logs#readme",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:patch": "standard-version --release-as patch",
+    "release:major": "standard-version --release-as major"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "dotenv": "^17.2.4"
+  },
+  "devDependencies": {
+    "standard-version": "^9.5.0"
   }
 }
