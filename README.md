@@ -27,7 +27,7 @@
 ### From NPM (Recommended)
 
 ```bash
-npx devlogs
+npx @anthuanvasquez/devlogs
 ```
 
 ### From Source
@@ -65,23 +65,23 @@ TELEGRAM_CHAT_ID=your_telegram_chat_id
 ## Usage
 
 Navigate to any git repository and run:
-`devlogs [today|yesterday] [--discord] [--telegram]`
+`npx @anthuanvasquez/devlogs [today|yesterday] [--discord] [--telegram]`
 
 ```bash
 # Default (today, ask if multiple targets)
-devlogs
+npx @anthuanvasquez/devlogs
 
 # Report for yesterday
-devlogs yesterday
+npx @anthuanvasquez/devlogs yesterday
 
 # Force send to Discord (skip prompt)
-devlogs today --discord
+npx @anthuanvasquez/devlogs today --discord
 
 # Force send to Telegram (skip prompt)
-devlogs yesterday --telegram
+npx @anthuanvasquez/devlogs yesterday --telegram
 
 # Send to both without prompt
-devlogs --discord --telegram
+npx @anthuanvasquez/devlogs --discord --telegram
 ```
 
 If multiple destinations are configured, you will be prompted to choose:
