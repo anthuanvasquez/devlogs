@@ -61,9 +61,23 @@ TELEGRAM_CHAT_ID=your_telegram_chat_id
 ## Usage
 
 Navigate to any git repository and run:
+`devlogs [today|yesterday] [--discord] [--telegram]`
 
 ```bash
+# Default (today, ask if multiple targets)
 devlogs
+
+# Report for yesterday
+devlogs yesterday
+
+# Force send to Discord (skip prompt)
+devlogs today --discord
+
+# Force send to Telegram (skip prompt)
+devlogs yesterday --telegram
+
+# Send to both without prompt
+devlogs --discord --telegram
 ```
 
 If multiple destinations are configured, you will be prompted to choose:
