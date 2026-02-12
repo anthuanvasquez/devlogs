@@ -1,10 +1,10 @@
 {
   "name": "@anthuanvasquez/devlogs",
   "description": "Genera reportes diarios de commits y envialos a Discord",
-  "version": "1.0.3",
-  "main": "index.js",
+  "version": "1.0.4",
+  "main": "dist/index.js",
   "bin": {
-    "devlogs": "./index.js"
+    "devlogs": "./dist/index.js"
   },
   "keywords": [
     "git",
@@ -16,7 +16,7 @@
     "developer",
     "tools"
   ],
-  "author": "Anthuan Vasquez",
+  "author": "Anthuanvasquez",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "esbuild index.js --bundle --platform=node --format=esm --outfile=dist/index.js --banner:js=\"#!/usr/bin/env node\" --packages=external",
     "release": "standard-version",
     "release:minor": "standard-version --release-as minor",
     "release:patch": "standard-version --release-as patch",
@@ -40,6 +41,7 @@
     "dotenv": "^17.2.4"
   },
   "devDependencies": {
+    "esbuild": "^0.27.3",
     "standard-version": "^9.5.0"
   }
 }
